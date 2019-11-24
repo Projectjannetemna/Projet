@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+        <h1>date futur</h1>
+        <p id="msg">
+            <label for="date">date : </label>
+            <input type="text" name="date" id="date"  onchange="verifDate(this)" ><strong id="warnning"></strong>
+        </p>
+        <p id="nb_jours_restant"></p>
+
+ 
+
+    <script>
+         function verifDate(champ)
+            {
+                var regex = /^(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$/;
+                var test1;
+            if(!regex.test(champ.value))
+                {   
+                   champ.style.backgroundColor="pink";
+                   var war= document.getElementById("warnning");
+                   war.textContent="DATE INVALIDE";
+
+                    test1=false;
+      
+                }
+            else
+                {   
+                    champ.style.backgroundColor="white";
+                    var war1= document.getElementById("warnning");
+                   war1.textContent="";
+                   test1=true;
+                }
+           
+            if(test1)
+            {
+              var d = new Date(champ.value);
+              var d1 =new Date();
+              if(d1>d)
+                {
+                    champ.style.backgroundColor="orange";
+                   var war= document.getElementById("warnning");
+                   war.textContent="DATE ANTERIEUR";
+                   return false;
+                }
+                else{
+                    var war1= document.getElementById("nb_jours_restant");
+                   war1.textContent=("nombre de jours rastants = "+ Math.floor((d-d1)/1000*60*60*24));
+                   return true;
+
+                }
+
+            }
+            }
+    </script>
+</body>
+
+</html>
